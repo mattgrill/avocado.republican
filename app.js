@@ -8,7 +8,7 @@ app
   .set('view engine', 'jade')
   .use(subdomain({
     domain : 'avocado.republican',
-    www : true
+    www : false
   }))
   .get('/', function (req, res) {
     res.redirect(302, 'http://taco.avocado.republican');
