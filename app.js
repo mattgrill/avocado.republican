@@ -21,4 +21,4 @@ app
       res.render('index', { term: req.params.subdomain, image: images[Math.floor(Math.random() * images.length)].url });
     });
   })
-  .listen(3000);
+  .listen(process.env.PORT || 3000);
