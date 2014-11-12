@@ -11,14 +11,17 @@ app
     www : false
   }))
   .get('/', function (req, res) {
-    res.redirect(302, 'http://taco.avocado.republican');
+    return res.redirect(302, 'http://taco.avocado.republican');
   })
   .get('/sub/www', function (req, res) {
-    res.redirect(302, 'http://taco.avocado.republican');
+    return res.redirect(302, 'http://taco.avocado.republican');
   })
   .get('/sub/:subdomain', function (req, res) {
     client.search('avocado' + req.params.subdomain, function (err, images) {
-      res.render('index', { term: req.params.subdomain, image: images[Math.floor(Math.random() * images.length)].url });
+      if (err) {
+        return res.redirect(302, 'http://taco.avocado.republican');
+      }
+      return res.render('index', { term: req.params.subdomain, image: images[Math.floor(Math.random() * images.length)].url });
     });
   })
   .listen(process.env.PORT || 3000);
